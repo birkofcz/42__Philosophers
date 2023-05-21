@@ -2,5 +2,5 @@
   <img src="resources/philosophersn.png" />
 </p>
 
-# 42: Philosophers
+<p style="text-align: center;"># 42 Prague: Philosophers</p>
 || Work in progress ...
