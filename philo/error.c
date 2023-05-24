@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.c                                     :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 16:43:26 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/24 12:42:44 by sbenes           ###   ########.fr       */
+/*   Created: 2023/05/24 12:35:30 by sbenes            #+#    #+#             */
+/*   Updated: 2023/05/24 12:44:56 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int ac, char **av)
+/* 
+FT_ERROR - prints error message specified, returns error code specified.
+ */
+int	ft_error(int errorcode, char *message)
 {
-	t_environment	env;
-
-	if (ac < 5 || ac > 6)
-		return (ft_error(1, "Not enough / Too much arguments"));
-	ft_cleaninit(&env);
-	if (ft_arguments(ac, av, &env) != 0)
-		return (1);
-	ft_printenv(&env);
-	return (0);
+	if (message)
+		printf("%s.\n", message);
+	return (errorcode);
 }

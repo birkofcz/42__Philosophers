@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:04 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/24 11:35:19 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/05/24 12:43:08 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,14 @@ typedef struct s_environment
 
 /* init.c */
 int		ft_arguments(int ac, char **av, t_environment *env);
-int		ft_atoi(const char *str);
+void	ft_cleaninit(t_environment *env);
+
+
+/* error.c */
 int		ft_error(int errorcode, char *message);
 
-
 /* helper_f.c - helper functions */
+int		ft_atoi(const char *str);
 void	ft_printenv(t_environment *env);
 
 #endif
