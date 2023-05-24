@@ -6,7 +6,7 @@
 #    By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 15:29:04 by sbenes            #+#    #+#              #
-#    Updated: 2023/05/24 12:59:59 by sbenes           ###   ########.fr        #
+#    Updated: 2023/05/24 13:17:30 by sbenes           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,11 +33,10 @@ SRC = 	philosophers.c init.c helper_f.c error.c
 #objects
 OBJ =		$(SRC:.c=.o)
 
-
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "$(BOLD)$(GREEN)[ 🙊 Compiling shit together... ]$(NC)"
+	@echo "$(BOLD)$(GREEN)[ 🙊 Compiling together... ]$(NC)"
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(INC)
 	@echo "$(BOLD)$(GREEN)[ 🪄 Program ready! ]$(NC)"
 	@echo ""
@@ -47,6 +46,9 @@ $(NAME): $(OBJ)
 	@echo ""
 	@echo "[ -- Have fun ! 😉 -- ]"
 	@echo ""
+
+$(OBJ): %.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 bonus: all
 
