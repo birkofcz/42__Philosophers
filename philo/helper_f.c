@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:55:09 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/24 12:38:25 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/05/24 14:21:21 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,5 @@ void	ft_printenv(t_environment *env)
 	printf("time_to_eat: %d\n", env->time_eat);
 	printf("time_to_sleep: %d\n", env->time_sleep);
 	printf("opt_n_meals_philo: %d\n", env->n_meals_opt);
+	printf("Number of forks: %d\n", env->n_forks);
 }

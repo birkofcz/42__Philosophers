@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:04 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/24 12:43:08 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/05/24 14:50:01 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,13 @@ typedef struct s_environment
 	int	time_eat;
 	int	time_sleep;
 	int	n_meals_opt;
+	int	n_forks;
 }	t_environment;
+
+typedef struct s_table
+{
+	pthread_mutex_t	forks[201];
+}	t_table;
 
 /* init.c */
 int		ft_arguments(int ac, char **av, t_environment *env);

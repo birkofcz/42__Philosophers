@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:22 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/24 13:03:58 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/05/24 14:19:01 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_cleaninit(t_environment *env)
 	env->time_eat = 0;
 	env->time_sleep = 0;
 	env->n_meals_opt = 0;
+	env->n_forks = 0;
 }
 
 /* 
@@ -61,5 +62,6 @@ int	ft_arguments(int ac, char **av, t_environment *env)
 		else
 			return (ft_error(1, "Bad arguments"));
 	}
+	env->n_forks = env->n_philo;
 	return (0);
 }
