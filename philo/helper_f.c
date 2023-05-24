@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.c                                     :+:      :+:    :+:   */
+/*   helper_f.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 16:43:26 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/24 11:47:13 by sbenes           ###   ########.fr       */
+/*   Created: 2023/05/24 10:55:09 by sbenes            #+#    #+#             */
+/*   Updated: 2023/05/24 11:02:08 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int ac, char **av)
+void	ft_printenv(t_environment *env)
 {
-	t_environment	env;
-
-	if (ft_arguments(ac, av, &env) != 0)
-		return (1);
-	ft_printenv(&env);
-	return (0);
+	printf("number_of_philosophers: %d\n", env->n_philo);
+	printf("time_to_die: %d\n", env->time_die);
+	printf("time_to_eat: %d\n", env->time_eat);
+	printf("time_to_sleep: %d\n", env->time_sleep);
+	printf("opt_n_meals_philo: %d\n", env->n_meals_opt);
 }
