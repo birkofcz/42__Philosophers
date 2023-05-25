@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:04 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/24 14:50:01 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/05/25 11:04:48 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct s_table
 /* init.c */
 int		ft_arguments(int ac, char **av, t_environment *env);
 void	ft_cleaninit(t_environment *env);
+char	*ft_truephilo(void);
+
 
 
 /* error.c */
