@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:43:26 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/25 11:07:13 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/05/26 10:37:36 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ int	main(int ac, char **av)
 	if (ft_arguments(ac, av, &env) != 0)
 		return (1);
 	ft_printenv(&env);
+	printf("\n");
+	ft_runtheshow(&env);
 	return (0);
 }

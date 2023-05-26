@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 16:42:58 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/23 16:27:07 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/05/26 14:40:28 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	*routine()
 	for (int i = 0; i < 50000; i++)
 	{
 		pthread_mutex_lock(&mutex);
+		
 		mails++;
 		pthread_mutex_unlock(&mutex);
 	}

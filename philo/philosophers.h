@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:04 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/25 11:04:48 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/05/26 13:56:59 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,19 @@ Any other philosopher number N sits between philosopher number N - 1 and philoso
 # include <sys/time.h>
 
 /* Struct with argument values - setting the environment */
+
 typedef struct s_environment
 {
-	int	n_philo;
-	int	time_die;
-	int	time_eat;
-	int	time_sleep;
-	int	n_meals_opt;
-	int	n_forks;
+	int		n_philo;
+	int		time_die;
+	int		time_eat;
+	int		time_sleep;
+	int		n_meals_opt;
+	int		n_forks;
+	int		*n_thread;
+	pthread_mutex_t	*forks;
 }	t_environment;
+
 
 typedef struct s_table
 {
@@ -65,12 +69,17 @@ void	ft_cleaninit(t_environment *env);
 char	*ft_truephilo(void);
 
 
-
 /* error.c */
 int		ft_error(int errorcode, char *message);
 
 /* helper_f.c - helper functions */
 int		ft_atoi(const char *str);
 void	ft_printenv(t_environment *env);
+
+/* show.c */
+void	ft_runtheshow(t_environment *env);
+void	*ft_routine(void *num);
+
+
 
 #endif
