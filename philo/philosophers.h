@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:04 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/29 13:48:08 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/05/29 14:20:22 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ typedef struct s_philosopher
 
 
 /* init.c */
-int		ft_arguments(int ac, char **av, t_environment *env);
-void	ft_cleaninit(t_environment *env);
+int		ft_arguments(int ac, char **av, t_env *env);
+void	ft_cleaninit(t_env *env);
 char	*ft_truephilo(void);
 
 
@@ -84,7 +84,7 @@ int		ft_error(int errorcode, char *message);
 
 /* utils.c - helper functions */
 int		ft_atoi(const char *str);
-void	ft_printenv(t_environment *env);
+void	ft_printenv(t_env *env);
 
 /* utils_time.c - time measure utility functions*/
 int		ft_timestamp(void);
