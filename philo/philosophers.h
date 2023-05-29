@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:04 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/26 13:56:59 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/05/29 13:48:08 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,26 @@ typedef struct s_environment
 	int		time_eat;
 	int		time_sleep;
 	int		n_meals_opt;
-	int		n_forks;
-	int		*n_thread;
-	pthread_mutex_t	*forks;
-}	t_environment;
+}	t_env;
 
-
-typedef struct s_table
+typedef struct s_philosopher
 {
-	pthread_mutex_t	forks[201];
-}	t_table;
+	int				id;
+	int				time_die;
+	int				time_eat;
+	int				time_sleep;
+	int				n_meals_opt;
+	int				num_of_philos;
+	int				*alive;
+	int				start_sleep;
+	int				*forks;
+	struct timeval	t_born;
+	struct timeval	t_lastmeal;
+	pthread_t		philosopher;
+	pthread_mutex_t	*mutex_fork;
+	pthread_mutex_t	*mx_out;
+}	t_philo;
+
 
 /* init.c */
 int		ft_arguments(int ac, char **av, t_environment *env);
@@ -72,14 +82,18 @@ char	*ft_truephilo(void);
 /* error.c */
 int		ft_error(int errorcode, char *message);
 
-/* helper_f.c - helper functions */
+/* utils.c - helper functions */
 int		ft_atoi(const char *str);
 void	ft_printenv(t_environment *env);
 
-/* show.c */
-void	ft_runtheshow(t_environment *env);
-void	*ft_routine(void *num);
+/* utils_time.c - time measure utility functions*/
+int		ft_timestamp(void);
+void	ft_starttime(int duration);
 
+/* philosophers.c */
+
+
+/* routine.c */
 
 
 #endif

@@ -6,64 +6,47 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:19:43 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/26 14:53:02 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/05/29 11:02:50 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-/* Prototype with philos reporting  */
-/*
-void *ft_routine(void *num)
+/* void	*ft_routine(void *arg)
 {
-    int philo_number = *(int *)num + 1;
-    printf("Hello from philo %d\n", philo_number);
-    sleep(2);
-    printf("Bye from philo %d\n", philo_number);
-	free(num);
+	int	philo_num;
+	struct timeval tv;
+
+	gettimeofday(&tv, NULL);
+	philo_num = *(int *)arg + 1;
+	printf("%ld Hello from philo %d\n", (long int)tv.tv_usec, philo_num);
+	sleep(2);
+	gettimeofday(&tv, NULL);
+	printf("%ld Bye from philo %d\n", ((long int)tv.tv_usec * 1000) + (tv.tv_sec / 1000), philo_num);
+	return (NULL);
+} */
+
+void *ft_routine(void *arg)
+{
+    int philo_num;
+    struct timeval start_time, end_time;
+
+    gettimeofday(&start_time, NULL);
+    philo_num = *(int *)arg + 1;
+    printf("Hello from philo %d\n", philo_num);
+    usleep(200);
+    gettimeofday(&end_time, NULL);
+
+    long int start_ms = start_time.tv_sec * 1000000 + start_time.tv_usec;
+    long int end_ms = end_time.tv_sec * 1000000 + end_time.tv_usec;
+    long int runtime_ms = end_ms - start_ms;
+
+    printf("Runtime of philo %d: %ld microseconds\n", philo_num, runtime_ms);
+
     return NULL;
 }
 
-void ft_runtheshow(t_environment *env)
-{
-	pthread_t	*philos;
-	int			i;
-
-	philos = malloc(env->n_philo * sizeof(pthread_t));
-    i = -1;
-    while (++i < env->n_philo)
-    {
-        int *philo_number = malloc(sizeof(int)); // Allocate memory for each thread's argument
-        *philo_number = i; // Store the thread number
-
-        pthread_create(&philos[i], NULL, &ft_routine, philo_number);
-    }
-
-    i = -1;
-    while (++i < env->n_philo)
-	{
-        pthread_join(philos[i], NULL);
-	}
-	free(philos);
-}
-*/
-
-
-void	*ft_routine(void *arg)
-{
-	t_environment	*env;
-	int				philo_num;
-
-	env = (t_environment *)arg;
-	philo_num = *(env->n_thread) + 1;
-	printf("Hello from philo %d\n", philo_num);
-	sleep(2);
-	printf("Bye from philo %d\n", philo_num);
-	return (NULL);
-}
-
-
-void	ft_runtheshow(t_environment *env)
+/* void	ft_runtheshow(t_environment *env)
 {
 	pthread_t		*philos;
 	t_environment	*philos_env;
@@ -90,6 +73,29 @@ void	ft_runtheshow(t_environment *env)
 
     free(philos);
     free(philos_env);
+}
+ */
+
+/* FT_RUNTHESHOW - creates philosophers as threads, giving them unique number */
+void	ft_runtheshow(t_environment *env)
+{
+	pthread_t	*philos;
+	int			i;
+	int			*philo_num;
+
+	philos = malloc(env->n_philo * sizeof(pthread_t));
+	i = -1;
+	while (++i < env->n_philo)
+	{
+		philo_num = malloc(sizeof(int));
+		*philo_num = i;
+		pthread_create(&philos[i], NULL, &ft_routine, philo_num);
+	}
+	i = -1;
+	while (++i < env->n_philo)
+		pthread_join(philos[i], NULL);
+	free(philos);
+	free(philo_num);
 }
 
 

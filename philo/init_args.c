@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_args.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:22 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/26 12:33:31 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/05/29 13:52:33 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@ char	*ft_truephilo(void)
 		"logical structure or empirical grounding");
 }
 
-void	ft_cleaninit(t_environment *env)
+void	ft_cleaninit(t_env *env)
 {
 	env->n_philo = 0;
 	env->time_die = 0;
 	env->time_eat = 0;
 	env->time_sleep = 0;
-	env->n_meals_opt = 0;
-	env->n_forks = 0;
+	env->n_meals_opt = -1;
 }
 
 /* 
@@ -43,8 +42,9 @@ static int	ft_isdigit(char *arg)
 	return (0);
 }
 
-int	ft_arguments(int ac, char **av, t_environment *env)
+int	ft_arguments(int ac, char **av, t_env *env)
 {	
+	ft_cleaninit(env);
 	if ((ft_isdigit(av[1])) == 0)
 		env->n_philo = ft_atoi(av[1]);
 	else
@@ -68,6 +68,5 @@ int	ft_arguments(int ac, char **av, t_environment *env)
 		else
 			return (ft_error(1, ft_truephilo()));
 	}
-	env->n_forks = env->n_philo;
 	return (0);
 }
