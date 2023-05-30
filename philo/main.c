@@ -6,12 +6,12 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:43:26 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/29 14:12:24 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/05/30 12:04:34 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
+/* 
 void	ft_philoborn(t_env *env, t_philo **philos,
 						pthread_mutex_t **mx_fork)
 {
@@ -20,7 +20,6 @@ void	ft_philoborn(t_env *env, t_philo **philos,
 	int				*alive;
 	pthread_mutex_t	*mx_out;
 	
-	/* Here I can do init of all philos at once - base od phelbrants code, which is more structured */
 	while (++i < env->n_philo)
 	*philos = malloc((env->n_philo * sizeof(t_philo))
 			+ env->n_philo * sizeof(int));
@@ -55,7 +54,44 @@ void	ft_philoborn(t_env *env, t_philo **philos,
 		gettimeofday(&(*platos)[i].t_created, NULL);
 	}
 
+} */
 
+void	ft_init_philosopher(t_philo *philo, int id, t_env *env,
+			pthread_mutex_t *mx_fork)
+{
+	philo->id = id;
+	philo->time_die = env->time_die;
+	philo->time_eat = env->time_eat;
+	philo->time_sleep = env->time_sleep;
+	philo->n_meals_opt = env->n_meals_opt;
+	philo->num_of_philos = env->n_philo;
+	philo->alive = malloc(sizeof(int));
+	*(philo->alive) = 1;
+	philo->start_sleep = 1;
+	philo->forks = malloc(env->n_philo * sizeof(int));
+	philo->mutex_fork = mx_fork;
+	philo->meals = 0;
+	gettimeofday(&(philo->t_born), NULL);
+	gettimeofday(&(philo->t_lastmeal), NULL);
+	pthread_mutex_init(philo->mutex_fork, NULL);
+}
+
+void	ft_philosborn(t_env *env, t_philo **philos,
+		pthread_mutex_t **mx_fork)
+{
+	int				i;
+	pthread_mutex_t	*mx_out;
+
+	mx_out = malloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(mx_out, NULL);
+	*philos = malloc(env->n_philo * sizeof(t_philo));
+	*mx_fork = malloc(env->n_philo * sizeof(pthread_mutex_t));
+	i = -1;
+	while (++i < env->n_philo)
+	{
+		ft_init_philosopher(&((*philos)[i]), i, env, &((*mx_fork)[i]));
+		(*philos)[i].mx_out = mx_out;
+	}
 }
 
 int	main(int ac, char **av)
@@ -63,6 +99,7 @@ int	main(int ac, char **av)
 	t_env			env;
 	t_philo			*philos;
 	pthread_mutex_t	*mx_fork;
+	int				i;
 
 	if (ac < 5 || ac > 6)
 		return (ft_error(1, ft_truephilo()));
@@ -71,7 +108,22 @@ int	main(int ac, char **av)
 		return (ft_error(1, ft_truephilo()));
 	if (ft_arguments(ac, av, &env) != 0)
 		return (1);
-	ft_philoborn(&env, &philos, &mx_fork)
-
-	return (0);
+	ft_philosborn(&env, &philos, &mx_fork);
+	i = -1;
+	while (++i < env.n_philo)
+	{
+		philos[i].id = i;
+		philos[i].forks[i] = 1;
+		pthread_mutex_init(&mx_fork[i], NULL);
+		pthread_create(&philos[i].thread, NULL, &ft_routine, &philos[i]);
+	}
+	i = -1;
+	while (++i < env.n_philo)
+	{
+		pthread_join(philos[i].thread, NULL);
+		pthread_mutex_destroy(&mx_fork[i]);
+	}
+	return (free(mx_fork), free(philos->forks),
+		pthread_mutex_destroy(philos->mx_out),
+		free(philos->alive), free(philos->mx_out), free(philos), 0);
 }
