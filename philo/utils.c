@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:55:09 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/29 13:33:29 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/06 15:00:15 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ void	ft_printenv(t_env *env)
 	printf("time_to_die: %d\n", env->time_die);
 	printf("time_to_eat: %d\n", env->time_eat);
 	printf("time_to_sleep: %d\n", env->time_sleep);
-	printf("opt_n_meals_philo: %d\n", env->n_meals_opt);
+	printf("opt_n_meals_philo: %d\n", env->meals);
 }

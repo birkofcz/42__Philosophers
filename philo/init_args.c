@@ -6,17 +6,11 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:22 by sbenes            #+#    #+#             */
-/*   Updated: 2023/05/29 13:52:33 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/06 16:43:25 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-char	*ft_truephilo(void)
-{
-	return ("Your arguments are fundamentally flawed in their "
-		"logical structure or empirical grounding");
-}
 
 void	ft_cleaninit(t_env *env)
 {
@@ -24,7 +18,9 @@ void	ft_cleaninit(t_env *env)
 	env->time_die = 0;
 	env->time_eat = 0;
 	env->time_sleep = 0;
-	env->n_meals_opt = -1;
+	env->meals = -1;
+	env->dead = 0;
+	env->finished = 0;
 }
 
 /* 
@@ -64,9 +60,15 @@ int	ft_arguments(int ac, char **av, t_env *env)
 	if (ac == 6)
 	{
 		if ((ft_isdigit(av[5])) == 0)
-			env->n_meals_opt = ft_atoi(av[5]);
+			env->meals = ft_atoi(av[5]);
 		else
 			return (ft_error(1, ft_truephilo()));
 	}
 	return (0);
 }
+
+/* void	ft_init(t_env *env)
+{
+	
+}
+ */
