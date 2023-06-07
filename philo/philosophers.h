@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:04 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/06 16:42:23 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/07 13:43:26 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ struct	s_env;
 
 typedef struct s_philo
 {
-	struct s_data	*data;
+	struct s_env	*env;
 	pthread_t		t1;
 	int				id;
 	int				eat_cont;
@@ -79,6 +79,8 @@ void				ft_printenv(t_env *env);
 
 /* utils_time.c - time measure utility functions*/
 
+/* init.c */
+void				ft_initphilos(t_env *env);
 
 /* main.c*/
 

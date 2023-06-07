@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:43:26 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/06 16:44:32 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/07 13:44:53 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	main(int ac, char **av)
 	if (ft_arguments(ac, av, &env) != 0)
 		return (1);
 	ft_printenv(&env);
+	ft_initphilos(&env);
 	//init everything and run the show/..
 	return (0);
 }
