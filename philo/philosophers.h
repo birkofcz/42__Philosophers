@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:04 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/07 13:43:26 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/08 12:57:23 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_philo
 	struct s_env	*env;
 	pthread_t		t1;
 	int				id;
-	int				eat_cont;
+	int				meals_eaten;
 	int				status;
 	int				eating;
 	int				time_to_die;
@@ -51,9 +51,9 @@ typedef struct s_env
 {
 	pthread_t		*tid;
 	int				n_philo;
-	int				meals;
+	int				meals_to_eat;
 	int				dead;
-	int				finished;
+	int				finished_eating;
 	t_philo			*philos;
 	int				time_die;
 	int				time_eat;
@@ -66,21 +66,26 @@ typedef struct s_env
 
 
 /* init.c */
-int					ft_arguments(int ac, char **av, t_env *env);
-void				ft_cleaninit(t_env *env);
+int		ft_arguments(int ac, char **av, t_env *env);
+void	ft_cleaninit(t_env *env);
 
 /* error.c */
-char				*ft_truephilo(void);
-int					ft_error(int errorcode, char *message);
+char	*ft_truephilo(void);
+int		ft_error(int errorcode, char *message);
 
 /* utils.c - helper functions */
-int					ft_atoi(const char *str);
-void				ft_printenv(t_env *env);
+int		ft_atoi(const char *str);
+void	ft_printenv(t_env *env);
 
 /* utils_time.c - time measure utility functions*/
+int		ft_gettime(void);
 
 /* init.c */
-void				ft_initphilos(t_env *env);
+int		ft_init(t_env *env);
+void	ft_init_philos(t_env *env);
+int		ft_init_forks(t_env *env);
+int		ft_init_arrays(t_env *env);
+
 
 /* main.c*/
 

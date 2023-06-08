@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:22 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/06 16:43:25 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/08 12:37:56 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_cleaninit(t_env *env)
 	env->meals = -1;
 	env->dead = 0;
 	env->finished = 0;
+	pthread_mutex_init(&env->write, NULL);
+	pthread_mutex_init(&env->lock, NULL);
 }
 
 /* 
@@ -66,9 +68,3 @@ int	ft_arguments(int ac, char **av, t_env *env)
 	}
 	return (0);
 }
-
-/* void	ft_init(t_env *env)
-{
-	
-}
- */
