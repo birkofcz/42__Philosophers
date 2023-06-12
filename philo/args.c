@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_args.c                                        :+:      :+:    :+:   */
+/*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:22 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/08 12:37:56 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/12 10:06:58 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	ft_cleaninit(t_env *env)
 	env->time_die = 0;
 	env->time_eat = 0;
 	env->time_sleep = 0;
-	env->meals = -1;
+	env->meals_to_eat = -1;
 	env->dead = 0;
-	env->finished = 0;
+	env->finished_eating = 0;
 	pthread_mutex_init(&env->write, NULL);
 	pthread_mutex_init(&env->lock, NULL);
 }
@@ -62,7 +62,7 @@ int	ft_arguments(int ac, char **av, t_env *env)
 	if (ac == 6)
 	{
 		if ((ft_isdigit(av[5])) == 0)
-			env->meals = ft_atoi(av[5]);
+			env->meals_to_eat = ft_atoi(av[5]);
 		else
 			return (ft_error(1, ft_truephilo()));
 	}

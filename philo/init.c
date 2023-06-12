@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 13:03:17 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/08 12:37:25 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/12 09:50:48 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_init_philos(t_env *env)
 		env->philos[i].env = env;
 		env->philos[i].id = i + 1;
 		env->philos[i].time_to_die = env->time_die;
-		env->philos[i].eat_cont = 0;
+		env->philos[i].meals_eaten = 0;
 		env->philos[i].eating = 0;
 		env->philos[i].status = 0;
 		pthread_mutex_init(&env->philos[i].lock, NULL);

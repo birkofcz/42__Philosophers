@@ -6,7 +6,7 @@
 #    By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 15:29:04 by sbenes            #+#    #+#              #
-#    Updated: 2023/06/08 12:38:08 by sbenes           ###   ########.fr        #
+#    Updated: 2023/06/12 10:01:12 by sbenes           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ CFLAGS =	-Wall -Wextra -Werror
 INC = -I philosophers.h
 	
 #sources
-SRC = 	main.c args.c utils.c utils_time.c error.c init.c
+SRC = 	main.c args.c utils.c utils_time.c error.c init.c routine.c actions.c
 OBJ =		$(SRC:.c=.o)
 
 all: $(NAME)

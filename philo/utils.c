@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:55:09 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/06 15:00:15 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/12 10:48:01 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,21 @@ int	ft_atoi(const char *str)
 	return (output * sign);
 }
 
+int	ft_strcmp(char *s1, char *s2)
+{
+	while (*s1 != '\0' && (*s1 == *s2))
+	{
+		s1++;
+		s2++;
+	}
+	return (*(char *)s1 - *(char *)s2);
+}
+
 void	ft_printenv(t_env *env)
 {
 	printf("number_of_philosophers: %d\n", env->n_philo);
-	printf("time_to_die: %d\n", env->time_die);
-	printf("time_to_eat: %d\n", env->time_eat);
-	printf("time_to_sleep: %d\n", env->time_sleep);
-	printf("opt_n_meals_philo: %d\n", env->meals);
+	printf("time_to_die: %lu\n", env->time_die);
+	printf("time_to_eat: %lu\n", env->time_eat);
+	printf("time_to_sleep: %lu\n", env->time_sleep);
+	printf("opt_n_meals_philo: %d\n", env->meals_to_eat);
 }
