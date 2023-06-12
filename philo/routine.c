@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 11:29:01 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/12 10:46:19 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/12 14:35:57 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*supervisor(void *philo_pointer)
 	{
 		pthread_mutex_lock(&philo->lock);
 		if (ft_gettime() >= philo->time_to_die && philo->eating == 0)
-			messages("died", philo);
+			messages(DIED, philo);
 		if (philo->meals_eaten == philo->env->meals_to_eat)
 		{
 			pthread_mutex_lock(&philo->env->lock);
@@ -63,7 +63,7 @@ void	*routine(void *philo_pointer)
 	while (philo->env->dead == 0)
 	{
 		eat(philo);
-		messages("is thinking", philo);
+		messages(THINKING, philo);
 	}
 	if (pthread_join(philo->t1, NULL))
 		return ((void *)1);
@@ -88,7 +88,7 @@ int	thread_init(t_env *env)
 	{
 		if (pthread_create(&env->tid[i], NULL, &routine, &env->philos[i]))
 			return (ft_error(1, "Error creating threads\n"));
-		ft_usleep(1);
+		//ft_usleep(1);
 	}
 	i = -1;
 	while (++i < env->n_philo)
