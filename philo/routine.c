@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 11:29:01 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/13 10:29:27 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/13 10:37:46 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ void	*routine(void *philo_pointer)
 		return ((void *)1);
 	return ((void *)0);
 }
-
-
 
 int	thread_init(t_env *env)
 {

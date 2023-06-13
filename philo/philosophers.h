@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:04 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/13 10:26:06 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/13 10:37:11 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef struct s_env
 	pthread_mutex_t	write;
 }	t_env;
 
-
 /* init.c */
 int			ft_init(t_env *env);
 void		ft_init_philos(t_env *env);
@@ -110,6 +109,5 @@ int			thread_init(t_env *env);
 void		*routine(void *philo_pointer);
 void		*supervisor(void *philo_pointer);
 void		*monitor(void *env_pointer);
-
 
 #endif
