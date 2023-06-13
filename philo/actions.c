@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 11:18:01 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/12 14:43:30 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/13 10:24:07 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	messages(char *str, t_philo *philo)
 
 	pthread_mutex_lock(&philo->env->write);
 	time = ft_gettime() - philo->env->time_born;
-	if (ft_strcmp("has died", str) == 0 && philo->env->dead == 0)
+	if (ft_strncmp(DIED, str, ft_strlen(DIED)) == 0 && philo->env->dead == 0)
 	{
 		printf("%lu %d %s\n", time, philo->id, str);
 		philo->env->dead = 1;
@@ -31,9 +31,9 @@ void	messages(char *str, t_philo *philo)
 void	take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
-	messages("has taken a fork", philo);
+	messages(FORK, philo);
 	pthread_mutex_lock(philo->l_fork);
-	messages("has taken a fork", philo);
+	messages(FORK, philo);
 }
 
 void	drop_forks(t_philo *philo)

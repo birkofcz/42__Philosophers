@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 11:29:01 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/12 14:35:57 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/13 10:29:27 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ void	*monitor(void *env_pointer)
 	t_philo	*philo;
 
 	philo = (t_philo *) env_pointer;
-	pthread_mutex_lock(&philo->env->write);
-	//printf("env val: %d", philo->env->dead);
-	pthread_mutex_unlock(&philo->env->write);
 	while (philo->env->dead == 0)
 	{
 		pthread_mutex_lock(&philo->lock);
@@ -82,19 +79,19 @@ int	thread_init(t_env *env)
 	if (env->meals_to_eat > 0)
 	{
 		if (pthread_create(&t0, NULL, &monitor, &env->philos[0]))
-			return (ft_error(1, "Error creating threads\n"));
+			return (ft_error(1, "Error creating threads", env));
 	}
 	while (++i < env->n_philo)
 	{
 		if (pthread_create(&env->tid[i], NULL, &routine, &env->philos[i]))
-			return (ft_error(1, "Error creating threads\n"));
-		//ft_usleep(1);
+			return (ft_error(1, "Error creating threads", env));
+		ft_usleep(1);
 	}
 	i = -1;
 	while (++i < env->n_philo)
 	{
 		if (pthread_join(env->tid[i], NULL))
-			return (ft_error(1, "Error joining threads\n"));
+			return (ft_error(1, "Error joining threads", env));
 	}
 	return (0);
 }

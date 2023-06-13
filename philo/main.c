@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:43:26 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/12 14:37:05 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/13 10:18:58 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,14 @@ void	ft_exit(t_env *env)
 	clear_env(env);
 }
 
-
 int	ft_onephilo(t_env *env)
 {
 	env->time_born = ft_gettime();
 	if (pthread_create(&env->tid[0], NULL, &routine, &env->philos[0]))
-		return (ft_error(1, "Error creating thread"));
+		return (ft_error(1, "Error creating thread", env));
 	pthread_detach(env->tid[0]);
 	while (env->dead == 0)
-		usleep(0);
+		ft_usleep(0);
 	ft_exit(env);
 	return (0);
 }
@@ -55,14 +54,12 @@ int	main(int ac, char **av)
 	t_env	env;
 
 	if (ac < 5 || ac > 6)
-		return (ft_error(1, ft_truephilo()));
-	//put this check into some init. Add conditon for > 200 philos.
-	if (ft_atoi(av[1]) < 1 || ft_atoi(av[2]) < 0 || ft_atoi(av[3]) < 0
-		|| ft_atoi(av[4]) < 0)
-		return (ft_error(1, ft_truephilo()));
+		return (ft_error(1, ft_truephilo(), &env));
+	if (ft_atoi(av[1]) < 1 || ft_atoi(av[1]) > 200 || ft_atoi(av[2]) < 0 
+		|| ft_atoi(av[3]) < 0 || ft_atoi(av[4]) < 0)
+		return (ft_error(1, ft_truephilo(), &env));
 	if (ft_arguments(ac, av, &env) != 0)
 		return (1);
-	ft_printenv(&env);
 	if (ft_init(&env) != 0)
 		return (1);
 	if (env.n_philo == 1)

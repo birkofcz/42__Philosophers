@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:04 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/12 14:51:18 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/13 10:26:06 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 # define EATING 	"\033[32mis eating   🍝\033[0m"
 # define SLEEPING	"\033[36mis sleeping 💤\033[0m"
 # define THINKING 	"\033[35mis thinking 🧠\033[0m"
-# define DIED 		"\033[31mhas died    🪦\033[0m"
+# define DIED 		"\033[31mdied    🪦\033[0m"
+# define FORK		"\033[33mhas taken a fork 🍴\033[0m"
 
 /* Struct with argument values - setting the environment */
 struct	s_env;
@@ -71,11 +72,12 @@ int			ft_init_arrays(t_env *env);
 
 /* error.c */
 char		*ft_truephilo(void);
-int			ft_error(int errorcode, char *message);
+int			ft_error(int errorcode, char *message, t_env *env);
 
 /* utils.c - helper functions */
 int			ft_atoi(const char *str);
-int			ft_strcmp(char *s1, char *s2);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t		ft_strlen(const char *s);
 void		ft_printenv(t_env *env);
 
 /* utils_time.c - time measure utility functions*/

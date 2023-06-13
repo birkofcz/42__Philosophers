@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 13:03:17 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/12 14:37:21 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/13 10:16:18 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int	ft_init_arrays(t_env *env)
 {
 	env->tid = malloc(sizeof(pthread_t) * env->n_philo);
 	if (!env->tid)
-		return (ft_error(1, "Error allocating array memory"));
+		return (ft_error(1, "Error allocating array memory", env));
 	env->forks = malloc(sizeof(pthread_mutex_t) * env->n_philo);
 	if (!env->forks)
-		return (ft_error(1, "Error allocating array memory"));
+		return (ft_error(1, "Error allocating array memory", env));
 	env->philos = malloc(sizeof(t_philo) * env->n_philo);
 	if (!env->philos)
-		return (ft_error(1, "Error allocating array memory"));
+		return (ft_error(1, "Error allocating array memory", env));
 	return (0);
 }
 
