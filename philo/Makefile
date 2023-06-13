@@ -6,7 +6,7 @@
 #    By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 15:29:04 by sbenes            #+#    #+#              #
-#    Updated: 2023/06/12 10:01:12 by sbenes           ###   ########.fr        #
+#    Updated: 2023/06/12 14:16:51 by sbenes           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,8 +47,9 @@ $(NAME): $(OBJ)
 	@echo "$(YELONBLK)$(BOLD)  | |   | | | | | | (_) \__ \ |_| | | | |  __/ |  \__ \  $(NC)"
 	@echo "$(YELONBLK)$(BOLD)  \_|   |_| |_|_|_|\___/|___/ .__/|_| |_|\___|_|  |___/  $(NC)"
 	@echo "$(YELONBLK)$(BOLD)                            | |                          $(NC)"
-	@echo "$(YELONBLK)$(BOLD)                            |_|  ...wanna spaghetti? 🍝  $(NC)"
+	@echo "$(YELONBLK)$(BOLD)                            |_| ...wanna spaghetti?🍝💀  $(NC)"
 	@echo "$(YELONBLK)$(BOLD)                                                         $(NC)"
+
 	@echo ""
 
 $(OBJ): %.o: %.c

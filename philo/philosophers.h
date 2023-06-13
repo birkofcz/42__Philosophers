@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:04 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/12 10:50:31 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/13 10:37:11 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,14 @@
 # include <stdint.h>
 # include <sys/types.h>
 
+/* Definitions for colored messages */
+# define EATING 	"\033[32mis eating   🍝\033[0m"
+# define SLEEPING	"\033[36mis sleeping 💤\033[0m"
+# define THINKING 	"\033[35mis thinking 🧠\033[0m"
+# define DIED 		"\033[31mdied    🪦\033[0m"
+# define FORK		"\033[33mhas taken a fork 🍴\033[0m"
+
 /* Struct with argument values - setting the environment */
-
-/* typedef struct s_environment
-{
-	int		n_philo;
-	int		time_die;
-	int		time_eat;
-	int		time_sleep;
-	int		n_meals_opt;
-}	t_env; */
-
 struct	s_env;
 
 typedef struct s_philo
@@ -66,53 +63,51 @@ typedef struct s_env
 	pthread_mutex_t	write;
 }	t_env;
 
-
 /* init.c */
-int		ft_init(t_env *env);
-void	ft_init_philos(t_env *env);
-int		ft_init_forks(t_env *env);
-int		ft_init_arrays(t_env *env);
+int			ft_init(t_env *env);
+void		ft_init_philos(t_env *env);
+int			ft_init_forks(t_env *env);
+int			ft_init_arrays(t_env *env);
 
 /* error.c */
-char	*ft_truephilo(void);
-int		ft_error(int errorcode, char *message);
+char		*ft_truephilo(void);
+int			ft_error(int errorcode, char *message, t_env *env);
 
 /* utils.c - helper functions */
-int		ft_atoi(const char *str);
-int		ft_strcmp(char *s1, char *s2);
-void	ft_printenv(t_env *env);
+int			ft_atoi(const char *str);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t		ft_strlen(const char *s);
+void		ft_printenv(t_env *env);
 
 /* utils_time.c - time measure utility functions*/
-uint64_t		ft_gettime(void);
+uint64_t	ft_gettime(void);
 int			ft_usleep(uint64_t time);
 
 /* args.c */
-void	ft_cleaninit(t_env *env);
-int		ft_arguments(int ac, char **av, t_env *env);
+void		ft_cleaninit(t_env *env);
+int			ft_arguments(int ac, char **av, t_env *env);
 
 /* init.c */
-int		ft_init(t_env *env);
-void	ft_init_philos(t_env *env);
-int		ft_init_forks(t_env *env);
-int		ft_init_arrays(t_env *env);
+int			ft_init(t_env *env);
+void		ft_init_philos(t_env *env);
+int			ft_init_forks(t_env *env);
+int			ft_init_arrays(t_env *env);
 
 /* main.c*/
-int		case_one(t_env *env);
-void	ft_exit(t_env *env);
-void	clear_env(t_env*env);
-
+int			ft_onephilo(t_env *env);
+void		ft_exit(t_env *env);
+void		clear_env(t_env*env);
 
 /* actions.c */
-void	eat(t_philo *philo);
-void	drop_forks(t_philo *philo);
-void	take_forks(t_philo *philo);
-void	messages(char *str, t_philo *philo);
+void		eat(t_philo *philo);
+void		drop_forks(t_philo *philo);
+void		take_forks(t_philo *philo);
+void		messages(char *str, t_philo *philo);
 
 /* routine.c */
-int		thread_init(t_env *env);
-void	*routine(void *philo_pointer);
-void	*supervisor(void *philo_pointer);
-void	*monitor(void *env_pointer);
-
+int			thread_init(t_env *env);
+void		*routine(void *philo_pointer);
+void		*supervisor(void *philo_pointer);
+void		*monitor(void *env_pointer);
 
 #endif
