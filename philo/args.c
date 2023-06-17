@@ -6,12 +6,15 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:25:22 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/13 10:15:18 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/17 13:59:41 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+/* 
+FT_CLEANINIT - just clean initialize the environment 
+ */
 void	ft_cleaninit(t_env *env)
 {
 	env->n_philo = 0;
@@ -40,31 +43,35 @@ static int	ft_isdigit(char *arg)
 	return (0);
 }
 
+/* 
+FT_ARGUMENTS - checks the arguments for a right format, writes
+them into the environment struct or gives error message.
+ */
 int	ft_arguments(int ac, char **av, t_env *env)
 {	
 	ft_cleaninit(env);
 	if ((ft_isdigit(av[1])) == 0)
 		env->n_philo = ft_atoi(av[1]);
 	else
-		return (ft_error(1, ft_truephilo(), env));
+		return (ft_error(1, ft_truephilo()));
 	if ((ft_isdigit(av[2])) == 0)
 		env->time_die = ft_atoi(av[2]);
 	else
-		return (ft_error(1, ft_truephilo(), env));
+		return (ft_error(1, ft_truephilo()));
 	if ((ft_isdigit(av[3])) == 0)
 		env->time_eat = ft_atoi(av[3]);
 	else
-		return (ft_error(1, ft_truephilo(), env));
+		return (ft_error(1, ft_truephilo()));
 	if ((ft_isdigit(av[4])) == 0)
 		env->time_sleep = ft_atoi(av[4]);
 	else
-		return (ft_error(1, ft_truephilo(), env));
+		return (ft_error(1, ft_truephilo()));
 	if (ac == 6)
 	{
 		if ((ft_isdigit(av[5])) == 0)
 			env->meals_to_eat = ft_atoi(av[5]);
 		else
-			return (ft_error(1, ft_truephilo(), env));
+			return (ft_error(1, ft_truephilo()));
 	}
 	return (0);
 }

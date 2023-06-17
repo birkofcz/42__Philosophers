@@ -6,12 +6,15 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:55:09 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/13 10:37:56 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/17 14:03:07 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+/* 
+Various utility functions used
+ */
 int	ft_atoi(const char *str)
 {
 	int	sign;

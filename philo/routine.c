@@ -6,13 +6,17 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 11:29:01 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/13 10:37:46 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/17 14:02:55 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-void	*monitor(void *env_pointer)
+/* 
+FT_WAITER - The waiter is initialized to the whole environment in case 
+there is a number of meals each philosopher must eat (optional param).
+Waiter checks how many philos have finished eating, protecting with mutex.
+ */
+void	*ft_waiter(void *env_pointer)
 {
 	t_philo	*philo;
 
@@ -27,7 +31,14 @@ void	*monitor(void *env_pointer)
 	return ((void *)0);
 }
 
-void	*supervisor(void *philo_pointer)
+/* 
+FT_SUPERVISOR - created for every philo.
+Check if the philosopher has eaten before the time_death limit. 
+If philosophers starves to death, the function reports it. Also taking care 
+about meals eaten counter. Protecting the incrementations and actions
+with mutexes.
+ */
+void	*ft_supervisor(void *philo_pointer)
 {
 	t_philo	*philo;
 
@@ -36,7 +47,7 @@ void	*supervisor(void *philo_pointer)
 	{
 		pthread_mutex_lock(&philo->lock);
 		if (ft_gettime() >= philo->time_to_die && philo->eating == 0)
-			messages(DIED, philo);
+			ft_message(DIED, philo);
 		if (philo->meals_eaten == philo->env->meals_to_eat)
 		{
 			pthread_mutex_lock(&philo->env->lock);
@@ -49,47 +60,57 @@ void	*supervisor(void *philo_pointer)
 	return ((void *)0);
 }
 
-void	*routine(void *philo_pointer)
+/* 
+FT_ROUTINE - basic routine for every philosopher. Initilizes time to die.
+Creates the supervisor. Until there is a dead flag on, philosophers follows 
+the routine, eating, sleeping, thinking.
+ */
+void	*ft_routine(void *philo_pointer)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *) philo_pointer;
 	philo->time_to_die = philo->env->time_die + ft_gettime();
-	if (pthread_create(&philo->t1, NULL, &supervisor, (void *)philo))
+	if (pthread_create(&philo->supervisor, NULL, &ft_supervisor, (void *)philo))
 		return ((void *)1);
 	while (philo->env->dead == 0)
 	{
-		eat(philo);
-		messages(THINKING, philo);
+		ft_eat(philo);
+		ft_message(THINKING, philo);
 	}
-	if (pthread_join(philo->t1, NULL))
+	if (pthread_join(philo->supervisor, NULL))
 		return ((void *)1);
 	return ((void *)0);
 }
 
-int	thread_init(t_env *env)
+/* 
+FT_THREAD_INIT - initializes the philosophers and waiter threads.
+Waits for join.
+ */
+int	ft_thread_init(t_env *env)
 {
 	int			i;
 	pthread_t	t0;
 
 	i = -1;
-	env->time_born = ft_gettime();
+	env->simulation_start = ft_gettime();
 	if (env->meals_to_eat > 0)
 	{
-		if (pthread_create(&t0, NULL, &monitor, &env->philos[0]))
-			return (ft_error(1, "Error creating threads", env));
+		if (pthread_create(&t0, NULL, &ft_waiter, &env->philos[0]))
+			return (ft_error(1, "Error creating threads"));
 	}
 	while (++i < env->n_philo)
 	{
-		if (pthread_create(&env->tid[i], NULL, &routine, &env->philos[i]))
-			return (ft_error(1, "Error creating threads", env));
+		if (pthread_create(&env->threads[i], NULL, &ft_routine,
+				&env->philos[i]))
+			return (ft_error(1, "Error creating threads"));
 		ft_usleep(1);
 	}
 	i = -1;
 	while (++i < env->n_philo)
 	{
-		if (pthread_join(env->tid[i], NULL))
-			return (ft_error(1, "Error joining threads", env));
+		if (pthread_join(env->threads[i], NULL))
+			return (ft_error(1, "Error joining threads"));
 	}
 	return (0);
 }

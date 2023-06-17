@@ -6,12 +6,15 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 13:00:08 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/12 10:50:12 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/17 13:37:10 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+/* 
+FT_GETTIME - retrieves current time in miliseconds.
+ */
 uint64_t	ft_gettime(void)
 {
 	uint64_t		time_ms;

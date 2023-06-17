@@ -6,7 +6,7 @@
 /*   By: sbenes <sbenes@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:04 by sbenes            #+#    #+#             */
-/*   Updated: 2023/06/13 10:37:11 by sbenes           ###   ########.fr       */
+/*   Updated: 2023/06/17 13:58:26 by sbenes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,9 @@ struct	s_env;
 typedef struct s_philo
 {
 	struct s_env	*env;
-	pthread_t		t1;
+	pthread_t		supervisor;
 	int				id;
 	int				meals_eaten;
-	int				status;
 	int				eating;
 	uint64_t		time_to_die;
 	pthread_mutex_t	lock;
@@ -48,7 +47,7 @@ typedef struct s_philo
 
 typedef struct s_env
 {
-	pthread_t		*tid;
+	pthread_t		*threads;
 	int				n_philo;
 	int				meals_to_eat;
 	int				dead;
@@ -57,7 +56,7 @@ typedef struct s_env
 	uint64_t		time_die;
 	uint64_t		time_eat;
 	uint64_t		time_sleep;
-	uint64_t		time_born;
+	uint64_t		simulation_start;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	lock;
 	pthread_mutex_t	write;
@@ -71,7 +70,7 @@ int			ft_init_arrays(t_env *env);
 
 /* error.c */
 char		*ft_truephilo(void);
-int			ft_error(int errorcode, char *message, t_env *env);
+int			ft_error(int errorcode, char *message);
 
 /* utils.c - helper functions */
 int			ft_atoi(const char *str);
@@ -96,18 +95,17 @@ int			ft_init_arrays(t_env *env);
 /* main.c*/
 int			ft_onephilo(t_env *env);
 void		ft_exit(t_env *env);
-void		clear_env(t_env*env);
 
 /* actions.c */
-void		eat(t_philo *philo);
-void		drop_forks(t_philo *philo);
-void		take_forks(t_philo *philo);
-void		messages(char *str, t_philo *philo);
+void		ft_eat(t_philo *philo);
+void		ft_forks_up(t_philo *philo);
+void		ft_forks_down(t_philo *philo);
+void		ft_message(char *str, t_philo *philo);
 
 /* routine.c */
-int			thread_init(t_env *env);
-void		*routine(void *philo_pointer);
-void		*supervisor(void *philo_pointer);
-void		*monitor(void *env_pointer);
+int			ft_thread_init(t_env *env);
+void		*ft_routine(void *philo_pointer);
+void		*ft_supervisor(void *philo_pointer);
+void		*ft_waiter(void *env_pointer);
 
 #endif
